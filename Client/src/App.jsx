@@ -1,33 +1,41 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+const traineeDataURL ="http://localhost:4000/trainees"
+const [list,setList] = useState([])
+
+useEffect(() => {
+console.log("effect fun")
+const fetchTraineeData = async () => {
+  try{
+const response = await fetch(traineeDataURL)
+const traineeData = await response.json()
+setList(traineeData)
+console.log("now im tired", traineeData)
+  }
+  catch(error){
+alert
+  }
+}
+},[])
+
+  const car = {type:"Fiat", model:"500", color:"white"};
+  const trainee = {name:"Thobani", age:"*", favColor:"SKYBLUE", location:"PMB" , datatype:""}
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    
+    <h1> My Name is: {trainee.name} </h1>
+
+    <p>I live @ {trainee.location} and my Favourite Colour is {trainee.favColor}</p>
+
+  
+
+    {/* <p>I love G{trainee.datatype}  ""</p> */}
+
     </>
   )
 }
